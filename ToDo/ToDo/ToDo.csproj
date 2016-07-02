@@ -188,7 +188,12 @@
     <Compile Include="Migrations\201607012307291_InitialCreate.Designer.cs">
       <DependentUpon>201607012307291_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607022135324_AddedToDoModel.cs" />
+    <Compile Include="Migrations\201607022135324_AddedToDoModel.Designer.cs">
+      <DependentUpon>201607022135324_AddedToDoModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ToDo.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\IdentityModel.cs" />
@@ -274,6 +279,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607012307291_InitialCreate.resx">
       <DependentUpon>201607012307291_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607022135324_AddedToDoModel.resx">
+      <DependentUpon>201607022135324_AddedToDoModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
