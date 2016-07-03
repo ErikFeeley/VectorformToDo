@@ -1,4 +1,6 @@
-﻿@{
+﻿@model string
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -6,8 +8,12 @@
     <h1>Clever Title</h1>
 </div>
 
-<div class="row">
-    <div class="col-xs-12">
-        
+<div class="row" ng-controller="homeController" data-ng-init="toDos = @Model">
+    <div class="col-xs-offset-2 col-xs-8">
+        <div class="well" ng-repeat="t in toDos">
+            {{t.description}}
+            {{t.id}}
+            {{t.isComplete}}
+        </div>
     </div>
 </div>
