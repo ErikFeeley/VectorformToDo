@@ -9,11 +9,30 @@
 </div>
 
 <div class="row" ng-controller="homeController" data-ng-init="toDos = @Model">
-    <div class="col-xs-offset-2 col-xs-8">
-        <div class="well" ng-repeat="t in toDos">
+    <div class="col-xs-offset-2 col-xs-4">
+        <h2>Active ToDos</h2>
+        <form ng-submit="addToDo(newToDoDescription)" class="well">
+            <div class="form-group">
+                <label class="control-label">New ToDo</label>
+                <input type="text" class="form-control" ng-model="newToDo.description" required/>
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+        <div class="well" ng-repeat="t in toDos | filter: {isComplete: false}">
             {{t.description}}
             {{t.id}}
             {{t.isComplete}}
+            <button type="button" class="btn btn-success pull-right" ng-click="completeToDo(t)">Complete</button>
+            <button type="button" class="btn btn-danger pull-right" ng-click="deleteToDo(t)">Delete</button>
+        </div>
+    </div>
+    <div class="col-xs-4">
+        <div class="well" ng-repeat="t in toDos | filter: {isComplete: true}">
+            {{t.description}}
+            {{t.id}}
+            {{t.isComplete}}
+            <button type="button" class="btn btn-primary pull-right" ng-click="activateToDo(t)">Activate</button>
+            <button type="button" class="btn btn-danger pull-right" ng-click="deleteToDo(t)">Delete</button>
         </div>
     </div>
 </div>
