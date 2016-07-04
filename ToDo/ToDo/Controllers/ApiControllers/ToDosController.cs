@@ -61,5 +61,15 @@ namespace ToDo.Controllers.ApiControllers
         }
 
         // how to do a restful delete of a range... hmm
+        [HttpDelete]
+        public IHttpActionResult DeleteToDos([FromUri] int[] ids)
+        {
+            var toDosInDb = _context.Todos.Where(t => ids.Contains(t.Id));
+
+            _context.Todos.RemoveRange(toDosInDb);
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }

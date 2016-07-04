@@ -10,7 +10,7 @@
 
 <div class="row" ng-controller="homeController" data-ng-init="toDos = @Model">
     <div class="col-xs-offset-2 col-xs-4">
-        <h2>Active ToDos</h2>
+        <h2>Active ToDos {{active.length}}</h2>
         <form ng-submit="addToDo(newToDoDescription)" class="well">
             <div class="form-group">
                 <label class="control-label">New ToDo</label>
@@ -18,7 +18,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Add</button>
         </form>
-        <div class="well" ng-repeat="t in toDos | filter: {isComplete: false}">
+        <div class="well" ng-repeat="t in toDos | filter: {isComplete: false} as active">
             {{t.description}}
             {{t.id}}
             {{t.isComplete}}
@@ -27,7 +27,8 @@
         </div>
     </div>
     <div class="col-xs-4">
-        <div class="well" ng-repeat="t in toDos | filter: {isComplete: true}">
+        <button type="button" class="btn btn-lg btn-danger" ng-click="deleteToDos()">Delete Completed</button>
+        <div class="well completed-todos" ng-repeat="t in toDos | filter: {isComplete: true}">
             {{t.description}}
             {{t.id}}
             {{t.isComplete}}
