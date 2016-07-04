@@ -55,4 +55,9 @@ toDoApp.controller('homeController', ['$scope', '$http', function ($scope, $http
       });
     });
   }
+
+  $scope.showAll = function () {
+    $scope.hideActive = false;
+    $scope.hideComplete = false;
+  }
 }]);
