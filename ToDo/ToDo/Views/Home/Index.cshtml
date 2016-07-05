@@ -13,12 +13,12 @@
             <form class="form-horizontal" ng-submit="addToDo(newToDoDescription)">
                 <div class="form-group">
                     <input type="text" class="col-md-10 form-control" placeholder="New ToDo" ng-model="newToDo.description" required />
-                    <button type="submit" class="btn btn-primary col-md-1">Add</button>
+                    <button type="submit" class="btn btn-primary col-md-1"><span class="glyphicon glyphicon-plus"></span></button>
                 </div>
             </form>
         </div>
         <div class="col-md-6 text-center">
-            <button type="button" class="btn btn-lg btn-danger" ng-click="deleteToDos()">Delete Completed</button>
+            <button type="button" class="btn btn-lg btn-danger" ng-click="deleteToDos()" ng-disabled="complete.length === 0">Delete Completed</button>
         </div>
     </div>
     <div class="row">
@@ -40,20 +40,16 @@
     <div class="row">
         <div class="col-md-6">
             <div class="well" ng-repeat="t in toDos | filter: {isComplete: false} as active" ng-hide="hideActive">
-                {{t.description}}
-                {{t.id}}
-                {{t.isComplete}}
-                <button type="button" class="btn btn-success pull-right" ng-click="completeToDo(t)">Complete</button>
-                <button type="button" class="btn btn-danger pull-right" ng-click="deleteToDo(t)">Delete</button>
+                <span class="col-md-8">{{t.description}}</span>
+                <button type="button" class="btn btn-success" ng-click="completeToDo(t)">Complete</button>
+                <button type="button" class="btn btn-danger" ng-click="deleteToDo(t)">Delete</button>
             </div>
         </div>
         <div class="col-md-6">
-            <div class="well completed-todos" ng-repeat="t in toDos | filter: {isComplete: true}" ng-hide="hideComplete">
-                {{t.description}}
-                {{t.id}}
-                {{t.isComplete}}
-                <button type="button" class="btn btn-primary pull-right" ng-click="activateToDo(t)">Activate</button>
-                <button type="button" class="btn btn-danger pull-right" ng-click="deleteToDo(t)">Delete</button>
+            <div class="well completed-todos" ng-repeat="t in toDos | filter: {isComplete: true} as complete" ng-hide="hideComplete">
+                <span class="col-md-8">{{t.description}}</span>
+                <button type="button" class="btn btn-primary" ng-click="activateToDo(t)">Activate</button>
+                <button type="button" class="btn btn-danger" ng-click="deleteToDo(t)">Delete</button>
             </div>
         </div>
     </div>
