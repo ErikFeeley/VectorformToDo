@@ -8,3 +8,5 @@ I also tried unit testing with Moq for the first time, which was interesting and
 A script is included to generate the SQL database.
 
 [[https://github.com/ErikFeeley/VectorformToDo/blob/master/HomePage.png]]
+
+ ![HomePage](https://github.com/ErikFeeley/VectorformToDo/blob/master/HomePage.png)
