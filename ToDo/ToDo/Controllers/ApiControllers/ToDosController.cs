@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using ToDo.Models;
 
@@ -10,11 +7,17 @@ namespace ToDo.Controllers.ApiControllers
 {
     public class ToDosController : ApiController
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public ToDosController()
         {
             _context = new ApplicationDbContext();
+        }
+
+        // This controller if for injecting the mock context during unit tests.
+        public ToDosController(ApplicationDbContext context)
+        {
+            _context = context;
         }
 
         [HttpPost]
@@ -60,7 +63,6 @@ namespace ToDo.Controllers.ApiControllers
             return Ok();
         }
 
-        // how to do a restful delete of a range... hmm
         [HttpDelete]
         public IHttpActionResult DeleteToDos([FromUri] int[] ids)
         {

@@ -6,7 +6,8 @@ namespace ToDo.Models
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Todo> Todos { get; set; }
+        // Marked virtual for moq unit testing
+        public virtual DbSet<Todo> Todos { get; set; }
 
         public ApplicationDbContext()
             : base("ToDo", throwIfV1Schema: false)
