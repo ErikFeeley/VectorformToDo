@@ -1,24 +1,23 @@
-﻿using System.Linq;
-using System.Web.Mvc;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using ToDo.Models;
+using System.Web.Mvc;
+using ToDo.Repository;
 
 namespace ToDo.Controllers
 {
     public class HomeController : Controller
     {
-        private ApplicationDbContext _context;
+        private readonly ToDoRepository _toDoRepository;
 
         public HomeController()
         {
-            _context = new ApplicationDbContext();
+            _toDoRepository = new ToDoRepository();
         }
 
         public ActionResult Index()
         {
             var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
-            var toDos = _context.Todos.ToList();
+            var toDos = _toDoRepository.Get();
 
             return View("Index", "", JsonConvert.SerializeObject(toDos, Formatting.None, settings));
         }

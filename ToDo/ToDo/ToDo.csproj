@@ -195,6 +195,8 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ToDo.cs" />
+    <Compile Include="Interfaces\IToDoRepository.cs" />
+    <Compile Include="Repository\ToDoRepository.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\IdentityModel.cs" />
