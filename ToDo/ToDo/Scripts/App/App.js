@@ -1,11 +1,11 @@
 ﻿var toDoApp = angular.module('toDoApp', []);
 
-toDoApp.controller('homeController', ['$scope', '$http', function ($scope, $http) {
+toDoApp.controller('homeController', ['$scope', 'toDoFactory', function ($scope, toDoFactory) {
   $scope.toDos = [];
   $scope.newToDo = {};
 
-  $scope.addToDo = function (description) {
-    $http.post('/api/ToDos', $scope.newToDo).then(function (response) {
+  $scope.addToDo = function () {
+    toDoFactory.addToDo($scope.newToDo).then(function (response) {
       $scope.toDos.push(response.data);
       $scope.newToDo.description = '';
     });
@@ -13,18 +13,16 @@ toDoApp.controller('homeController', ['$scope', '$http', function ($scope, $http
 
   $scope.completeToDo = function (toDo) {
     toDo.isComplete = true;
-    $http.put('/api/ToDos/' + toDo.id, toDo).then(function (response) {
-    });
+    toDoFactory.completeToDo(toDo);
   }
 
   $scope.activateToDo = function (toDo) {
     toDo.isComplete = false;
-    $http.put('/api/ToDos/' + toDo.id, toDo).then(function (response) {
-    });
+    toDoFactory.activateToDo(toDo);
   }
 
   $scope.deleteToDo = function (toDo) {
-    $http.delete('/api/ToDos/' + toDo.id).then(function (response) {
+    toDoFactory.deleteToDo(toDo).then(function (response) {
       var index = $scope.toDos.indexOf(toDo);
       $scope.toDos.splice(index, 1);
     });
@@ -47,7 +45,7 @@ toDoApp.controller('homeController', ['$scope', '$http', function ($scope, $http
     });
     queryString = queryString.slice(0, -1);
 
-    $http.delete('/api/ToDos/' + queryString).then(function (response) {
+    toDoFactory.deleteToDos(queryString).then(function (response) {
       $scope.toDos = $scope.toDos.filter(function (todo) {
         if (todo.isComplete === false) {
           return todo;
@@ -60,4 +58,31 @@ toDoApp.controller('homeController', ['$scope', '$http', function ($scope, $http
     $scope.hideActive = false;
     $scope.hideComplete = false;
   }
+}]);
+
+toDoApp.factory('toDoFactory', ['$http', function ($http) {
+  var urlBase = '/api/ToDos/';
+  var toDoFactory = {};
+
+  toDoFactory.addToDo = function (toDo) {
+    return $http.post(urlBase, toDo);
+  };
+
+  toDoFactory.completeToDo = function (toDo) {
+    return $http.put(urlBase + toDo.id, toDo);
+  };
+
+  toDoFactory.activateToDo = function (toDo) {
+    return $http.put(urlBase + toDo.id, toDo);
+  };
+
+  toDoFactory.deleteToDo = function (toDo) {
+    return $http.delete(urlBase + toDo.id);
+  };
+
+  toDoFactory.deleteToDos = function (queryString) {
+    return $http.delete(urlBase + queryString);
+  };
+
+  return toDoFactory;
 }]);
