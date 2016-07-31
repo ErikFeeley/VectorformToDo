@@ -10,7 +10,7 @@ namespace ToDo.Models
         public virtual DbSet<Todo> Todos { get; set; }
 
         public ApplicationDbContext()
-            : base("ToDo", throwIfV1Schema: false)
+            : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 

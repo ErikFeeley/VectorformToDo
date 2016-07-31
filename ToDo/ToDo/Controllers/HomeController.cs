@@ -16,6 +16,7 @@ namespace ToDo.Controllers
 
         public ActionResult Index()
         {
+            // serialize list of todos and send them to homepage.
             var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
             var toDos = _toDoRepository.Get();
 
